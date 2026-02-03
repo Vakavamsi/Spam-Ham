@@ -1,7 +1,7 @@
 import re
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import nltk
 
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
@@ -10,7 +10,7 @@ def clean(text):
     text = re.sub(r"[^a-zA-Z]", " ", text)
     text = text.lower()
 
-    # SIMPLE TOKENIZATION (DEPLOYMENT SAFE)
+    # ✅ NO nltk.word_tokenize
     tokens = text.split()
 
     stop_words = set(stopwords.words('english'))
@@ -20,5 +20,4 @@ def clean(text):
     tokens = [lemmatizer.lemmatize(w) for w in tokens]
 
     return " ".join(tokens)
-
 
